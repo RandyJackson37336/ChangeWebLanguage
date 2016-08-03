@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="content-script-type" content="text/javascript" />
+
+    <!--lib-->
+    <script src="Lib/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="INLanguage/jquery.i18n.properties.js"></script>
+    <title>国际化语言</title>
+
+    <script type="text/javascript">
+        // load I18N bundles
+        $(document).ready(function() {
+// 修改‘JP’为‘CN’，就将日文版本改为中文版本页面。
+// 可在bundle中直接添加文件‘Messages_XX.properties’,就可以添加一种语言
+            loadBundles('CN');
+        });
+
+        function loadBundles(lang) {
+            $.i18n.properties({ //加载资浏览器语言对应的资源文件
+                name:'Messages', //资源文件名称
+                path:'bundle/',//资源文件路径
+                mode:'both', //用both的方式使用资源文件中的值
+                language:lang,
+                callback: function() { //加载成功后设置显示内容
+                    updateExamples();
+                }
+            });
+        }
+
+        //加载成功后设置显示内容
+        function updateExamples() {
+            // Accessing values through the map
+            var ex1 = 'msg_title';
+            var ex2 = 'msg_subtitle';
+            var ex3 = 'msg_content';
+            var changeLanguage = 'msg_changeL';
+
+            //改变按钮的文字
+            $('#myBtn').html($.i18n.prop(changeLanguage))
+
+            $('#mapExamples')
+                    .empty()
+                    .append('<li>'+jQuery.i18n.prop(ex1)+'</li>')
+                    .append('<li>'+jQuery.i18n.prop(ex2)+'</li>')
+                    .append('<li>'+jQuery.i18n.prop(ex3)+'</li>');
+        }
+
+        // 按钮的切换语言事件
+        var flag = 1
+        function changeLanguage(){
+            if(flag==0){
+                loadBundles('CN');
+                flag = 1;
+            }else{
+                loadBundles('JP');
+                flag = 0;
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+<button  id="myBtn" onclick="changeLanguage()">切换中日文语言</button>
+<ul id="mapExamples">
+
+</ul>
+
+</body>
+</html>
