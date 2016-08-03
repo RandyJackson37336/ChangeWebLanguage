@@ -4,7 +4,7 @@ jQuery.i18n.properties是一款轻量级的jQuery国际化插件
 
 使用它可以在Web上简单的添加国际化语言。
 
-该Demo实现的是中日文的切换。
+该Demo是HTML5实现中日文的切换。
 
 
 运行效果如下：
